@@ -26,5 +26,41 @@ namespace ConnectDBSQL.Pages
             InitializeComponent();
             DGridUsers.ItemsSource = GokkeeEntities.GetGokkee().Person.ToList();
         }
+
+        private void BtnEdit_Click(object sender, RoutedEventArgs e)
+        {
+            ClassFrame.frmObj.Navigate(new AddEditPage((sender as Button).DataContext as Person));
+        }
+
+        private void BtnAdd_Click(object sender, RoutedEventArgs e)
+        {
+            ClassFrame.frmObj.Navigate(new AddEditPage(null));
+        }
+
+        private void BtnDelete_Click(object sender, RoutedEventArgs e)
+        {
+            var usersForRemoving = DGridUsers.SelectedItems.Cast<Person>().ToList();
+            if (MessageBox.Show($"Удалить {usersForRemoving.Count()} пользователей?", "Внимание!",
+                MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes);
+            try
+            {
+                GokkeeEntities.GetGokkee().Person.RemoveRange(usersForRemoving);
+                GokkeeEntities.GetGokkee().SaveChanges();
+                MessageBox.Show("Данные удалены");
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message.ToString());
+            }
+        }
+
+        private void Page_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            if(Visibility == Visibility.Visible)
+            {
+                GokkeeEntities.GetGokkee().ChangeTracker.Entries().ToList().ForEach(p => p.Reload());
+                DGridUsers.ItemsSource = GokkeeEntities.GetGokkee().Person.ToList();
+            }
+        }
     }
 }

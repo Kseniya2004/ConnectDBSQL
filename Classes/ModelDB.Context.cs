@@ -15,13 +15,13 @@ namespace ConnectDBSQL.Classes
     
     public partial class GokkeeEntities : DbContext
     {
-        private static GokkeeEntities _context;
+        private static GokkeeEntities _context;//
         public GokkeeEntities()
             : base("name=GokkeeEntities")
         {
         }
 
-        public static GokkeeEntities GetGokkee()
+        public static GokkeeEntities GetGokkee()//
         {
             if (_context == null)
                 _context = new GokkeeEntities();

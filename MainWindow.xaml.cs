@@ -26,6 +26,24 @@ namespace ConnectDBSQL
             InitializeComponent();
             ClassFrame.frmObj = frmMain;
             frmMain.Navigate(new Pages.PageUser());
+           
+        }
+
+        private void BtnBack_Click(object sender, RoutedEventArgs e)
+        {
+            frmMain.GoBack();
+        }
+
+        private void frmMain_ContentRendered(object sender, EventArgs e)
+        {
+            if(frmMain.CanGoBack)
+            {
+                BtnBack.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                BtnBack.Visibility = Visibility.Hidden;
+            }
         }
     }
 }

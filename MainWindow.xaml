@@ -9,23 +9,24 @@
     <Grid>        
         <Grid.RowDefinitions>
             <RowDefinition Height="2*"/>
-            <RowDefinition Height="5*"/>
+            <RowDefinition Height="5*"/>            
         </Grid.RowDefinitions>
-        <StackPanel Orientation="Horizontal"
-                    HorizontalAlignment="Center">
-            <!--<Image Source="/Resourses/Восьмерка.png"/>-->
-            <TextBlock Margin="10"
-                   FontSize="20pt" 
-                   FontFamily="TimesNewRoman"
+        <StackPanel Orientation="Horizontal"                    
+                    Background="LightGray"
+                    Margin="5">
+            <Image Source="Resources/123.jpg"/>
+            <TextBlock Margin="10"  
+                   FontSize="25pt"
                    VerticalAlignment="Center"
-                   Text="Пример проекта">
-            </TextBlock>
+                   Text="Студент ЛДПК" Width="480"/>
+            <Button Name="BtnBack" Content="Назад"                   
+                    HorizontalAlignment="Right"                    
+                    Click="BtnBack_Click"/>
         </StackPanel>
-
         <Frame Grid.Row="1"
                Name="frmMain"
-               NavigationUIVisibility="Hidden">
-
-        </Frame>
+               NavigationUIVisibility="Hidden"
+                ContentRendered="frmMain_ContentRendered">
+        </Frame>        
     </Grid>
 </Window>
